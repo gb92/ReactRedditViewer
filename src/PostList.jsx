@@ -1,5 +1,14 @@
 import React from 'react';
+import Post from './Post';
+import { css } from 'emotion';
 
+const postLissClassName = css(`
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+    grid-auto-rows: minmax(min-content, max-content);
+    grid-column-gap: 5px;
+    grid-row-gap: 15px;
+`);
 class PostList extends React.Component {
     constructor(props) {
         super(props);
@@ -22,14 +31,10 @@ class PostList extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={postLissClassName}>
             {this.state.posts.map((post, i) => {
                 console.log(post);
-                return (
-                    <a href={`https://reddit.com/${post.data.permalink}`} target='_blank'>
-                        <img key={`Post-Image-${i}`} src={post.data.thumbnail}/>
-                    </a>
-                )
+                return <Post key={`Post-${i}`}post={post}/>
             })}
             </div>
         )
