@@ -9,8 +9,6 @@ const postClassName = css(`
     color: #FFFFFF;
 `);
 
-
-//    background: rgba(80, 80, 80, 0.5);
 const postTitleWrapperClassName = css(`
     grid-row: bottom;
     height: 100%;
@@ -20,6 +18,7 @@ const postTitleWrapperClassName = css(`
         rgba(0,0,0, 1));
     position: relative;
 `);
+
 const postTitleClassName = css(`
     text-align: left;
     position: absolute;
@@ -33,14 +32,26 @@ class Post extends React.Component {
         const {post} = this.props;
         if(post.data.is_self || post.data.thumbnail === 'nsfw') {
             // ignore self posts && nsfw posts for now
-            console.log(post.data.type);
             return null;
         }
+        let thumb = post.data.thumbnail;
+        // Figure out why higher res previews aren't available...
+        /*
+        console.log(post.data.preview)
+        if (post.data.preview && post.data.preview.images) {
+            const image = post.data.preview.images[0].resolutions.find(image => {
+                console.log(image)
+                return image.width > 500;
+            });
+            thumb = image ? image.url : thumb;
+        }
+        */
         const postBackgroundClassName = cx(postClassName, css(`
-            background: url(${post.data.thumbnail}) center;
+            background: url(${thumb}) center;
             background-repeat: no-repeat;
             background-size: cover;
         `));
+
         return (
             <a className={postBackgroundClassName} href={`https://reddit.com/${post.data.permalink}`} target='_blank' rel="noopener noreferrer">
                 {/* <img src={post.data.thumbnail}/> */}
