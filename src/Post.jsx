@@ -30,6 +30,7 @@ const postTitleClassName = css(`
 class Post extends React.Component {
     render() {
         const {post} = this.props;
+        console.log(post);
         if(post.data.is_self || post.data.thumbnail === 'nsfw') {
             // ignore self posts && nsfw posts for now
             return null;

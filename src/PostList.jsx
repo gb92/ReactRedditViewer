@@ -2,7 +2,7 @@ import React from 'react';
 import Post from './Post';
 import { css } from 'emotion';
 
-const postLissClassName = css(`
+const postListClassName = css(`
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
     grid-auto-rows: minmax(min-content, max-content);
@@ -44,7 +44,7 @@ class PostList extends React.Component {
 
     render() {
         return (
-            <div className={postLissClassName}>
+            <div className={postListClassName}>
             {this.state.posts.map((post, i) => {
                 return <Post key={`Post-${i}`} post={post}/>
             })}
